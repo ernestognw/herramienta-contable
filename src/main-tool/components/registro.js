@@ -8,6 +8,7 @@ function Registro(props) {
       <Minus
         handleMinusClick={props.handleMinusClick}
         id={props.id}
+        name={props.name}
       />
       <select value={props.value} className="form-control col-6">
         <option value="Bancos">Bancos</option>
