@@ -10,3 +10,7 @@
 .input-group {
   margin-bottom: 0px;
 }
+
+span.input-group-addon.icon-padding {
+  padding: 10px 0 10px 4px;  
+}

@@ -8,39 +8,49 @@ import Container from "./page/components/container";
 
 class App extends Component {
   state = {
-    inputs: [
+    deudoras: [
       { 
-        id: 0,
         Cuenta: 'Bancos',
         Cantidad: '00.00',
       },
       { 
-        id: 1,
         Cuenta: 'Caja',
         Cantidad: '00.00',
       },
       { 
-        id: 2,
         Cuenta: 'Bancos',
         Cantidad: '00.00',
       },
       { 
-        id: 3,
         Cuenta: 'Bancos',
         Cantidad: '00.00',
       },
       { 
-        id: 4,
         Cuenta: 'Bancos',
         Cantidad: '00.00',
       }
     ]
   }
 
-  handleChange = event => {
-    console.log('Works');
+  handleMinusClick = (id) => {
+    let newState = this.state.deudoras;
+    newState.splice(id, 1);
     this.setState({
-      inputs: {...this.state.inputs}
+      deudoras: newState
+    })
+    console.log(this.state)
+  }
+
+  handlePlusClick = event => {
+    let newState = this.state.deudoras;
+    newState.push(
+      { 
+        Cuenta: 'Bancos',
+        Cantidad: '00.00',
+      }
+    )
+    this.setState({
+      deudoras: newState
     })
   }
 
@@ -51,9 +61,10 @@ class App extends Component {
           title="Contabilidad Electrónica"
         />
         <Container>
-          <Deudoras 
-            registros={this.state.inputs}
-            handleChange={this.handleChange}
+          <Deudoras
+            registros={this.state.deudoras}
+            handleMinusClick={this.handleMinusClick}
+            handlePlusClick={this.handlePlusClick}
           />
         </Container>
       </AppLayout>
