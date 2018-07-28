@@ -1,0 +1,17 @@
+.error {
+  border-color: #f96332;
+}
+
+.success {
+  border-color: #18ce0f;
+}
+
+.success-icon {
+  color: #18ce0f;
+  font-size: 12px;
+}
+
+.error-icon {
+  color: #f96332;
+  font-size: 12px;  
+}

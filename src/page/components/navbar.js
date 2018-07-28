@@ -5,7 +5,7 @@ function Navbar(props) {
     <nav className="navbar navbar-expand-lg bg-primary">
       <div className="container">
         <div className="navbar-translate">
-          <a className="navbar-brand" href="#pablo">
+          <a className="navbar-brand">
             { props.title }
           </a>
         </div>

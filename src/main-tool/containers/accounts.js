@@ -2,76 +2,74 @@ import React, { Component } from "react";
 import Cuentas from "../components/cuentas";
 import { connect } from "react-redux";
 
+import * as actions from '../../actions/actions';
+import { bindActionCreators } from 'redux';
+
 class Accounts extends Component {
 
   handleMinusClick = event => {
-    let newState;
-    if (event.target.title === 'debtors') {
-      newState = this.props.debtors;
-      newState.splice(event.target.id, 1);
-      this.setState({
-        debtors: newState
-      });
-    } else if (event.target.title === 'creditors') {
-      newState = this.props.creditors;
-      newState.splice(event.target.id, 1);
-      this.setState({
-        creditors: newState
-      });
-    }
+    this.props.actions.minusClick(event.target);
   };
 
   handlePlusClick = event => {
-    console.log(event.target.id);
-    let newState;
-    if (event.target.id === "debtors") {
-      newState = this.props.debtors;
-      newState.push({
-        account: "Bancos",
-        quantity: "00.00"
-      });
-      this.setState({
-        debtors: newState
-      });
-    } else if (event.target.id === "creditors") {
-      newState = this.props.creditors;
-      newState.push({
-        account: "Bancos",
-        quantity: "00.00"
-      });
-      this.setState({
-        creditors: newState
-      });
-    }
+    this.props.actions.plusClick(event.target.title);
   };
 
-  setDebtorsRef = element => {
-    this.debtors = element;
+  handleSelectChange = event => {
+    this.props.actions.selectChange(event.target.value, event.target.name, event.target.title)
   };
 
-  setCreditrosRef = element => {
-    this.creditors = element;
+  handleInputChange = event => {
+    this.props.actions.inputChange(event.target.value, event.target.name, event.target.title)
   };
+
+  handleFocus = event => {
+    this.props.actions.inputFocus(event.target.name, event.target.title);
+  }
+
+  handleBlur = event => {
+    this.props.actions.inputBlur(event.target.name, event.target.title)
+  }
+
+  handleSubmit = event => {
+    this.props.actions.getXML()
+  }
 
   render() {
     return (
       <div className="row">
         <Cuentas
-          setRef={this.setDebtorsRef}
+          handleFocus={this.handleFocus}
+          handleBlur={this.handleBlur}          
           name="debtors"
           title="Cuentas Deudoras"
           registros={this.props.debtors}
           handleMinusClick={this.handleMinusClick}
           handlePlusClick={this.handlePlusClick}
+          handleSelectChange={this.handleSelectChange}
+          handleInputChange={this.handleInputChange}
+          totalMoney={this.props.debtorsTotal}
+          isBalanced={this.props.isBalanced}                       
         />
         <Cuentas
-          setRef={this.setCreditorsRef}
+          handleFocus={this.handleFocus}
+          handleBlur={this.handleBlur}                    
           name="creditors"
           title="Cuentas Acreedoras"
           registros={this.props.creditors}
           handleMinusClick={this.handleMinusClick}
           handlePlusClick={this.handlePlusClick}
+          handleSelectChange={this.handleSelectChange}
+          handleInputChange={this.handleInputChange} 
+          totalMoney={this.props.creditorsTotal}                
+          isBalanced={this.props.isBalanced}                       
         />
+        <div className="col-12 text-center">
+          <button className="btn btn-success btn-lg" onClick={this.handleSubmit}><b>Obtener XML</b></button>
+        </div>
+        <div className="col-12">
+          <textarea className="form-control" rows="15" value={this.props.XML_file}></textarea>
+        </div>
       </div>
     );
   }
@@ -80,8 +78,18 @@ class Accounts extends Component {
 function mapStateToProps(state, props) {
   return {
     debtors: state.debtors,
-    creditors: state.creditors
+    creditors: state.creditors,
+    debtorsTotal: state.debtorsTotal,
+    creditorsTotal: state.creditorsTotal,
+    isBalanced: state.isBalanced,
+    XML_file: state.XML_file
   };
 }
 
-export default connect(mapStateToProps)(Accounts);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Accounts);

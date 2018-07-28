@@ -1,48 +1,62 @@
 const initialState = {
   debtors: [
     { 
-      account: 'Bancos',
-      quantity: '00.00',
+      account: '110100000',
+      quantity: '',
+      active: false,
     },
     { 
-      account: 'Caja',
-      quantity: '00.00',
+      account: '110100000',
+      quantity: '',
+      active: false,
     },
     { 
-      account: 'Bancos',
-      quantity: '00.00',
+      account: '110100000',
+      quantity: '',
+      active: false,
     },
     { 
-      account: 'Bancos',
-      quantity: '00.00',
+      account: '110100000',
+      quantity: '',
+      active: false,
     },
     { 
-      account: 'Bancos',
-      quantity: '00.00',
+      account: '110100000',
+      quantity: '',
+      active: false,
     }
   ],
   creditors: [
     { 
-      account: 'Bancos',
-      quantity: '00.00',
+      account: '110100000',
+      quantity: '',
+      active: false,
     },
     { 
-      account: 'Caja',
-      quantity: '00.00',
+      account: '110100000',
+      quantity: '',
+      active: false,
     },
     { 
-      account: 'Bancos',
-      quantity: '00.00',
+      account: '110100000',
+      quantity: '',
+      active: false,
     },
     { 
-      account: 'Bancos',
-      quantity: '00.00',
+      account: '110100000',
+      quantity: '',
+      active: false,
     },
     { 
-      account: 'Bancos',
-      quantity: '00.00',
+      account: '110100000',
+      quantity: '',
+      active: false,
     }
-  ]
+  ],
+  debtorsTotal: '0.00',
+  creditorsTotal: '0.00',
+  isBalanced: true,
+  XML_file: '',
 };
 
 export default initialState;
